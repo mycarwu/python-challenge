@@ -5,7 +5,7 @@ import collections
 
 # Set path for file
 csvpath = '/Users/MyCar/Desktop/python-challenge/PyPoll/election_data.csv'
-file_to_output = os.path.join("..", "PyPoll", "election_analysis.txt")
+text_file = open("election_analysis.txt", "w") 
 
 total_votes = 0
 
@@ -21,31 +21,32 @@ with open(csvpath, "r") as csvfile:
         candidate = vote[2]
         count[candidate] += 1
 
-total_dups = 0
 maxt = 0
+sum_candidate = {}
 
 for candidate,num_votes in count.items():
-    percentage = (num_votes/total_votes)*100.00
-    printlater = (f'{candidate}: {(percentage)}% ({num_votes})')
+    percentage = num_votes/total_votes
     
-
-    maxpercentage=int(percentage)
+    
+    maxpercentage=float(percentage)
     maxt=max(maxt, maxpercentage)
 
-    if int(percentage) == maxt:
+    if float(percentage) == maxt:
         winner = candidate
+     
 
-    output = (
-    f'Election Results\n'
-    f'-------------------------\n'
-    f'Total Votes:{total_votes}\n'
-    f'{printlater}\n'
-    f'-------------------------\n'
-    f'Winner: {winner}\n'
-    f'-------------------------\n'
-    )
+def printandwrite(message):
+    print(message)
+    text_file.write(message)
 
-    print(output)
-
-    with open(file_to_output, "w") as txt_file:
-        txt_file.write(output)
+printandwrite(f'Election Results\n')
+printandwrite(f'-------------------------\n')
+printandwrite(f'Total Votes: {total_votes}\n')
+printandwrite(f'-------------------------\n')
+for candidate,num_votes in count.items():
+    percentage = (num_votes/total_votes)
+    percentage = percentage * 100
+    printandwrite(f'{candidate}: {percentage:.3f}% ({num_votes})\n')
+printandwrite(f'-------------------------\n')
+printandwrite(f'Winner: {winner}\n')
+printandwrite(f'-------------------------\n')

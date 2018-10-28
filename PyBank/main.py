@@ -61,11 +61,11 @@ output= (
 
     f'Total: ${Total}\n'
 
-    f'Average Change: {total_change}\n'
+    f'Average Change: ${total_change:.2f}\n'
 
-    f'Greatest Increase in Profits: {max_increase[0]} ${max_increase[1]}\n'
+    f'Greatest Increase in Profits: {max_increase[0]} (${max_increase[1]})\n'
 
-    f'Greatest Decrease in Profits: {max_decrease[0]} ${max_decrease[1]}\n')
+    f'Greatest Decrease in Profits: {max_decrease[0]} (${max_decrease[1]})\n')
 
 print(output)
 
